@@ -1,3 +1,4 @@
+from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import viewsets, generics
 
 from school.models import Course, Lesson
@@ -17,6 +18,8 @@ class LessonCreateAPIView(generics.CreateAPIView):
 class LessonListAPIView(generics.ListAPIView):
     serializer_class = LessonSerializer
     queryset = Lesson.objects.all()
+    filter_backends = (DjangoFilterBackend,)
+    filterset_fields = ('course',)
 
 
 class LessonRetrieveAPIView(generics.RetrieveAPIView):
